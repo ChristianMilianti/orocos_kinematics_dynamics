@@ -6,11 +6,15 @@ find_package(orocos_kdl)
 include_directories(${orocos_kdl_INCLUDE_DIRS})
 link_directories(${orocos_kdl_LIBRARY_DIRS})
 
-SET(PYTHON_VERSION 2 CACHE STRING "Python Version")
-find_package(PythonInterp ${PYTHON_VERSION} REQUIRED)
-find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} REQUIRED)
+SET(PYTHON_VERSION 3.6.9 CACHE STRING "Python Version")
+set(PYTHON_EXECUTABLE "/home/liruiw/anaconda2/envs/omg_2/bin/python3.6")
+message(STATUS "    PYTHON_SITE_PACKAGES: ${PYTHON_SITE_PACKAGES} ${PYTHON_VERSION_MAJOR} ${PYTHON_EXECUTABLE}")
+message(STATUS "    PYTHON_INCLUDE_DIRS: ${PYTHON_INCLUDE_DIRS}")
+find_package(PythonInterp ${PYTHON_VERSION} REQUIRED )
+find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} REQUIRED )
 execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(plat_specific=True, prefix=''))" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES OUTPUT_STRIP_TRAILING_WHITESPACE)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
 find_package(SIP REQUIRED)
 include(SIPMacros)
 
