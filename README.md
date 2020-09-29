@@ -1,6 +1,6 @@
-### Use another_build_copy/orocos_kinematics_dynamics
+ 
+## Installation
 
-## Install Sip
 ```bash  
 
 cd sip-4.19.3
@@ -15,6 +15,7 @@ mkdir build; cd build;
 cmake ..
 make -j8; sudo make install
 ```
+
 ```bash (Python Binding  ) 
 cd ../../python_orocos_kdl
 mkdir build; cd build;
@@ -22,4 +23,7 @@ cmake ..  -DPYTHON_VERSION=3.6.9 -DPYTHON_EXECUTABLE=~/anaconda2/envs/omg/bin/py
 make -j8;  cp PyKDL.so ~/anaconda2/envs/omg/lib/python3.6/site-packages/
 ```
 
-
+## Note
+1. Sanity check ``` python -c "import PyKDL```
+2. Python 2 users should replace all appearances of python3 accordingly.
+3. The anaconda path should also be modified accordingly
