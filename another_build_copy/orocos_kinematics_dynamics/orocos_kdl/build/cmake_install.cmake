@@ -1,4 +1,4 @@
-# Install script for directory: /home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl
+# Install script for directory: /home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -32,19 +32,24 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake" TYPE FILE FILES "/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/orocos_kdl-config.cmake")
+# Is this installation the result of a crosscompile?
+if(NOT DEFINED CMAKE_CROSSCOMPILING)
+  set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake" TYPE FILE FILES "/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/orocos_kdl-config-version.cmake")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake" TYPE FILE FILES "/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/orocos_kdl-config.cmake")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake" TYPE FILE FILES "/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/orocos_kdl-config-version.cmake")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake/OrocosKDLTargets.cmake")
     file(DIFFERENT EXPORT_FILE_CHANGED FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake/OrocosKDLTargets.cmake"
-         "/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/CMakeFiles/Export/share/orocos_kdl/cmake/OrocosKDLTargets.cmake")
+         "/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/CMakeFiles/Export/share/orocos_kdl/cmake/OrocosKDLTargets.cmake")
     if(EXPORT_FILE_CHANGED)
       file(GLOB OLD_CONFIG_FILES "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake/OrocosKDLTargets-*.cmake")
       if(OLD_CONFIG_FILES)
@@ -53,23 +58,23 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
       endif()
     endif()
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake" TYPE FILE FILES "/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/CMakeFiles/Export/share/orocos_kdl/cmake/OrocosKDLTargets.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake" TYPE FILE FILES "/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/CMakeFiles/Export/share/orocos_kdl/cmake/OrocosKDLTargets.cmake")
   if("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake" TYPE FILE FILES "/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/CMakeFiles/Export/share/orocos_kdl/cmake/OrocosKDLTargets-release.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl/cmake" TYPE FILE FILES "/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/CMakeFiles/Export/share/orocos_kdl/cmake/OrocosKDLTargets-release.cmake")
   endif()
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl" TYPE FILE FILES "/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/package.xml")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orocos_kdl" TYPE FILE FILES "/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/package.xml")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/doc/cmake_install.cmake")
-  include("/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/src/cmake_install.cmake")
-  include("/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/tests/cmake_install.cmake")
-  include("/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/models/cmake_install.cmake")
-  include("/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/examples/cmake_install.cmake")
+  include("/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/doc/cmake_install.cmake")
+  include("/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/src/cmake_install.cmake")
+  include("/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/tests/cmake_install.cmake")
+  include("/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/models/cmake_install.cmake")
+  include("/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/examples/cmake_install.cmake")
 
 endif()
 
@@ -81,5 +86,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/liruiw/Projects/OOMG/orocos_kinematics_dynamics/orocos_kdl/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/liruiw/Downloads/orocos_kinematics_dynamics/another_build_copy/orocos_kinematics_dynamics/orocos_kdl/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
