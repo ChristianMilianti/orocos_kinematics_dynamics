@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 2.4.6)
+if(POLICY CMP0048)
+  cmake_policy(SET CMP0048 NEW)
+endif()
 
 project(python_orocos_kdl)
 
@@ -6,15 +9,15 @@ find_package(orocos_kdl)
 include_directories(${orocos_kdl_INCLUDE_DIRS})
 link_directories(${orocos_kdl_LIBRARY_DIRS})
 
-SET(PYTHON_VERSION 3.6.9 CACHE STRING "Python Version")
-set(PYTHON_EXECUTABLE "/home/liruiw/anaconda2/envs/omg_2/bin/python3.6")
-message(STATUS "    PYTHON_SITE_PACKAGES: ${PYTHON_SITE_PACKAGES} ${PYTHON_VERSION_MAJOR} ${PYTHON_EXECUTABLE}")
-message(STATUS "    PYTHON_INCLUDE_DIRS: ${PYTHON_INCLUDE_DIRS}")
-find_package(PythonInterp ${PYTHON_VERSION} REQUIRED )
-find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} REQUIRED )
+if(DEFINED ENV{ROS_PYTHON_VERSION})
+  SET(PYTHON_VERSION $ENV{ROS_PYTHON_VERSION} CACHE STRING "Python Version")
+else()
+  SET(PYTHON_VERSION 2 CACHE STRING "Python Version")
+endif()
+find_package(PythonInterp ${PYTHON_VERSION} REQUIRED)
+find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} REQUIRED)
 execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(plat_specific=True, prefix=''))" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES OUTPUT_STRIP_TRAILING_WHITESPACE)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-
 find_package(SIP REQUIRED)
 include(SIPMacros)
 
@@ -22,7 +25,12 @@ include_directories(${SIP_INCLUDE_DIR} ${PYTHON_INCLUDE_DIRS})
 
 file(GLOB SIP_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.sip")
 set(SIP_INCLUDES ${SIP_FILES})
-set(SIP_EXTRA_OPTIONS "-o")
+if (${PYTHON_VERSION_MAJOR} GREATER "2")
+  set(SIP_EXTRA_OPTIONS "-o")
+else()
+  set(SIP_EXTRA_OPTIONS "-o;-x;PYTHON3")
+endif()
+
 set(PYTHON_SITE_PACKAGES_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/${PYTHON_SITE_PACKAGES})
 add_sip_python_module(PyKDL PyKDL/PyKDL.sip ${orocos_kdl_LIBRARIES})
 

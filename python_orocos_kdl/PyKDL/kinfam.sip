@@ -19,6 +19,7 @@
 //License along with this library; if not, write to the Free Software
 //Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+%Feature PYTHON3
 
 template<TYPE>
 %MappedType std::vector<TYPE>
@@ -115,15 +116,21 @@ using namespace KDL;
 
 
 public:
-    enum JointType {RotAxis,RotX,RotY,RotZ,TransAxis,TransX,TransY,TransZ,None};
-    Joint(std::string name, JointType type=None,double scale=1,double offset=0,
-              double inertia=0,double damping=0,double stiffness=0);
-    Joint(JointType type=None,double scale=1,double offset=0,
-          double inertia=0,const double damping=0,double stiffness=0);
+
+%If (PYTHON3)
+    enum JointType {RotAxis,RotX,RotY,RotZ,TransAxis,TransX,TransY,TransZ,Fixed};
+%End
+%If (!PYTHON3)
+    enum JointType {RotAxis,RotX,RotY,RotZ,TransAxis,TransX,TransY,TransZ,None,Fixed=None};
+%End
+    Joint(std::string name, JointType type=Fixed,double scale=1,double offset=0,
+        double inertia=0,double damping=0,double stiffness=0);
+    Joint(JointType type=Fixed,double scale=1,double offset=0,
+        double inertia=0,const double damping=0,double stiffness=0);
     Joint(std::string name, Vector origin, Vector axis, JointType type, double scale=1, double offset=0,
-	      double inertia=0, double damping=0, double stiffness=0);
+        double inertia=0, double damping=0, double stiffness=0);
     Joint(Vector origin, Vector axis, JointType type, double scale=1, double offset=0,
-	      double inertia=0, double damping=0, double stiffness=0);
+        double inertia=0, double damping=0, double stiffness=0);
     
     Joint(const Joint& in);
     
@@ -132,6 +139,9 @@ public:
     Vector JointAxis() const /Factory/;
     Vector JointOrigin() const /Factory/;
     std::string getName()const;
+    const double& getInertia()const;
+    const double& getDamping()const;
+    const double& getStiffness()const;
 
     JointType getType() const;
     std::string getTypeName() const;
@@ -210,8 +220,8 @@ class Segment
 using namespace KDL;
 %End
 public:
-    Segment(const std::string& name, const Joint& joint=Joint(Joint::None), const Frame& f_tip=Frame::Identity(),const RigidBodyInertia& I = RigidBodyInertia::Zero());
-    Segment(const Joint& joint=Joint(Joint::None), const Frame& f_tip=Frame::Identity(),const RigidBodyInertia& I = RigidBodyInertia::Zero());
+    Segment(const std::string& name, const Joint& joint=Joint(Joint::Fixed), const Frame& f_tip=Frame::Identity(),const RigidBodyInertia& I = RigidBodyInertia::Zero());
+    Segment(const Joint& joint=Joint(Joint::Fixed), const Frame& f_tip=Frame::Identity(),const RigidBodyInertia& I = RigidBodyInertia::Zero());
     Segment(const Segment& in);
 
     const std::string* __repr__();
@@ -263,7 +273,7 @@ public:
     bool addSegment(const Segment& segment, const std::string& hook_name);
     unsigned int getNrOfJoints()const;
     unsigned int getNrOfSegments()const;
-    Chain* getChain(const std::string& chain_root, const std::string& chain_tip)const;
+    Chain* getChain(const std::string& chain_root, const std::string& chain_tip)const /Factory/;
 %MethodCode
     Chain* chain = new Chain();
     sipCpp->getChain(*a0, *a1, *chain);
@@ -506,10 +516,9 @@ class ChainIkSolverPos_NR_JL : ChainIkSolverPos
 using namespace KDL;
 %End
 public:
-    ChainIkSolverPos_NR_JL(const Chain& chain,const JntArray &q_min,const JntArray &q_max, 
-                        ChainFkSolverPos& fksolver,ChainIkSolverVel& iksolver,
+    ChainIkSolverPos_NR_JL(const Chain& chain, const JntArray& q_min, const JntArray& q_max, ChainFkSolverPos& fksolver,ChainIkSolverVel& iksolver,
                         unsigned int maxiter=100,double eps=epsilon);
-    
+
     virtual int CartToJnt(const JntArray& q_init , const Frame& p_in ,JntArray& q_out);
     virtual void updateInternalDataStructures();
 };
@@ -674,10 +683,21 @@ using namespace KDL;
 %End
 public:
     ChainJntToJacSolver(const Chain& chain);
-    int JntToJac(const JntArray& q_in,Jacobian& jac);
+    int JntToJac(const JntArray& q_in,Jacobian& jac, int seg_nr=-1);
     virtual void updateInternalDataStructures();
 };
 
+class ChainJntToJacDotSolver : SolverI
+{
+%TypeHeaderCode
+#include <kdl/chainjnttojacdotsolver.hpp>
+using namespace KDL;
+%End
+public:
+    ChainJntToJacDotSolver(const Chain& chain);
+    int JntToJacDot(const JntArrayVel& q_in,Jacobian& jac, int seg_nr=-1);
+    virtual void updateInternalDataStructures();
+};
 
 class ChainIdSolver : SolverI
 {

@@ -5,9 +5,8 @@
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
 import sys
-sys.path.insert(0, '/home/liruiw/Downloads/sip-4.19.6')
-
 import sipconfig
+
 sipcfg = sipconfig.Configuration()
 print("sip_version:%06.0x" % sipcfg.sip_version)
 print("sip_version_str:%s" % sipcfg.sip_version_str)

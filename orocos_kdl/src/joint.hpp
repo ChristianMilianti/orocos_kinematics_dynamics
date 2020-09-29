@@ -44,7 +44,7 @@ namespace KDL {
      */
     class Joint {
     public:
-        typedef enum { RotAxis,RotX,RotY,RotZ,TransAxis,TransX,TransY,TransZ,None} JointType;
+        typedef enum { RotAxis,RotX,RotY,RotZ,TransAxis,TransX,TransY,TransZ,None,Fixed=None } JointType;
         /**
          * Constructor of a joint.
          *
@@ -190,6 +190,36 @@ namespace KDL {
             default:
                 return "None";
             }
+        };
+
+        /**
+         * Request the inertia of the joint.
+         *
+         * @return const reference to the inertia of the joint
+         */
+        const double& getInertia() const
+        {
+            return inertia;
+        };
+
+        /**
+         * Request the damping of the joint.
+         *
+         * @return const reference to the damping of the joint
+         */
+        const double& getDamping() const
+        {
+            return damping;
+        };
+
+        /**
+         * Request the stiffness of the joint.
+         *
+         * @return const reference to the stiffness of the joint
+         */
+        const double& getStiffness() const
+        {
+            return stiffness;
         };
 
         virtual ~Joint();
