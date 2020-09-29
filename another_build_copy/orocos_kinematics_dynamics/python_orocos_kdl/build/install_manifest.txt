@@ -1,0 +1,2 @@
+/usr/local/lib/python3/dist-packages/PyKDL.so
+/usr/local/share/python_orocos_kdl/package.xml
